@@ -21,8 +21,8 @@ public class UserController  implements UserServiceImpl{
 
     @Override
     @PostMapping
-    public void add(@RequestBody UserDTO dto) {
-        userService.add(dto);
+    public UserDTO add(@RequestBody UserDTO dto) {
+        return userService.add(dto);
     }
 
     @Override

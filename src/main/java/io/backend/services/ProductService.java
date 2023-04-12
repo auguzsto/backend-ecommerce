@@ -68,7 +68,9 @@ public class ProductService implements ProductServiceImpl {
 	@Override
 	public void delete(ProductDTO dto) {
 		//Check if product exists.
-		Product product = productRepository.findById(dto.getId()).orElse(null);
+		Product product = productRepository.findById(dto.getId()).orElseThrow(
+			() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Produto inválido.")
+		);
 
 		//Delete product.
 		productRepository.delete(product);

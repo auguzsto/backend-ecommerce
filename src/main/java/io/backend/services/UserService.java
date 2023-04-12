@@ -1,5 +1,6 @@
 package io.backend.services;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,10 +19,13 @@ public class UserService implements UserServiceImpl{
     private UserRepository userRepository;
 
     @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public void add(UserDTO dto) {
+    public UserDTO add(UserDTO dto) {
         //Check if username already exists.
         userRepository.findByUsername(dto.getUsername()).map(
             user -> {
@@ -34,6 +38,7 @@ public class UserService implements UserServiceImpl{
         user.setUsername(dto.getUsername());
         user.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
         userRepository.save(user);
+        return modelMapper.map(user, UserDTO.class);
  
 
         

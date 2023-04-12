@@ -4,7 +4,7 @@ import io.backend.DTO.UserDTO;
 
 public interface UserServiceImpl {
     
-    void add(UserDTO dto);
+    UserDTO add(UserDTO dto);
 
     void delete(UserDTO dto);
     
