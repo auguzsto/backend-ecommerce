@@ -19,14 +19,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests().
-        requestMatchers("POST", "/user").permitAll().
-        requestMatchers("GET", "/product").permitAll().
-        anyRequest().
-        authenticated().
-        and().
-        csrf().disable().
-        cors().disable().
-        httpBasic();
+                requestMatchers("POST", "/user").permitAll().
+                requestMatchers("GET", "/product").permitAll().
+                requestMatchers("POST", "/auth").permitAll().
+                anyRequest().
+                authenticated().
+                and().
+                csrf().disable().
+                cors().disable().
+                httpBasic();
+
         return http.build();
     }
 }
