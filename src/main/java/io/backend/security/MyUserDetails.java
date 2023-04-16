@@ -1,4 +1,4 @@
-package io.backend.services;
+package io.backend.security;
 
 import java.util.Collection;
 

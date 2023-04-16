@@ -1,7 +1,5 @@
 package io.backend.security;
 
-import io.backend.services.MyUserDetailsService;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,7 +32,6 @@ public class SecurityConfig {
                 requestMatchers("POST", "/user").permitAll().
                 requestMatchers("GET", "/product").permitAll().
                 requestMatchers("POST", "/auth").permitAll().
-                requestMatchers("GET", "/pedido").permitAll().
                 anyRequest().
                 authenticated().
                 and().

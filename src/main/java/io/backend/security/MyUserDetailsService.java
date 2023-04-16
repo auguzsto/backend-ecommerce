@@ -1,5 +1,6 @@
-package io.backend.services;
+package io.backend.security;
 
+import io.backend.security.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
