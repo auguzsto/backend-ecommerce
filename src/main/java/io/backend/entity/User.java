@@ -24,5 +24,8 @@ public class User {
     private String password;
 
     private Integer vendor;
+
+    @NotNull @Column(unique = true)
+    private String basicToken;
     
 }

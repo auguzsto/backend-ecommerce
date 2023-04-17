@@ -2,6 +2,7 @@ package io.backend.services;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,8 @@ import io.backend.DTO.UserDTO;
 import io.backend.entity.User;
 import io.backend.interfaces.UserServiceImpl;
 import io.backend.repository.UserRepository;
+
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class UserService implements UserServiceImpl{
@@ -37,6 +40,7 @@ public class UserService implements UserServiceImpl{
         User user = new User();
         user.setUsername(dto.getUsername());
         user.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
+        user.setBasicToken(HttpHeaders.encodeBasicAuth(dto.getUsername(), dto.getPassword(), StandardCharsets.ISO_8859_1));
         userRepository.save(user);
         return modelMapper.map(user, UserDTO.class);
  
