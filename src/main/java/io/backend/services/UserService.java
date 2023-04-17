@@ -40,6 +40,7 @@ public class UserService implements UserServiceImpl{
         User user = new User();
         user.setUsername(dto.getUsername());
         user.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
+        user.setVendor(0);
         user.setBasicToken(HttpHeaders.encodeBasicAuth(dto.getUsername(), dto.getPassword(), StandardCharsets.ISO_8859_1));
         userRepository.save(user);
         return modelMapper.map(user, UserDTO.class);

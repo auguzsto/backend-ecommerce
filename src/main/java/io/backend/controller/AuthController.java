@@ -22,7 +22,7 @@ public class AuthController implements AuthServiceImpl {
 
     @Override
     @PostMapping
-    public AuthDTO login(@RequestBody UserDTO dto) throws IllegalArgumentException {
+    public AuthDTO login(@RequestBody UserDTO dto) {
         return authService.login(dto);
     }
 
