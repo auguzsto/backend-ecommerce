@@ -10,17 +10,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import io.backend.DTO.ProductDTO;
-import io.backend.entity.Product;
-import io.backend.interfaces.ProductServiceImpl;
-import io.backend.repository.ProductRepository;
+import io.backend.DTO.ItemDTO;
+import io.backend.entity.Item;
+import io.backend.interfaces.ItemServiceImpl;
+import io.backend.repository.ItemRepository;
 import io.backend.repository.UserRepository;
 
 @Service
-public class ProductService implements ProductServiceImpl {
+public class ItemService implements ItemServiceImpl {
     
     @Autowired
-    private ProductRepository productRepository;
+    private ItemRepository itemRepository;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -29,17 +29,17 @@ public class ProductService implements ProductServiceImpl {
     private ModelMapper modelMapper;
 
 	@Override
-	public Set<ProductDTO> all() {
+	public Set<ItemDTO> all() {
 		//Return list of the products
-        return productRepository.findAll()
+        return itemRepository.findAll()
         .stream().map(
-            product -> modelMapper.map(product, ProductDTO.class)
+						item -> modelMapper.map(item, ItemDTO.class)
             ).collect(Collectors.toSet());
 	}
 
 	@Override
 	@Transactional
-	public void add(ProductDTO dto) {
+	public void add(ItemDTO dto) {
 		//Get user && check if user exists.
 		userRepository.findById(dto.getIdUser()).map(
 				user -> {
@@ -47,12 +47,12 @@ public class ProductService implements ProductServiceImpl {
 						throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 					}
 
-					Product product = new Product();
-					product.setName(dto.getName());
-					product.setPrice(dto.getPrice());
-					product.setUser(user);
-					productRepository.save(product);
-					return ProductDTO.class;
+					Item item = new Item();
+					item.setName(dto.getName());
+					item.setPrice(dto.getPrice());
+					item.setUser(user);
+					itemRepository.save(item);
+					return ItemDTO.class;
 				}
 		).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
 
@@ -61,14 +61,14 @@ public class ProductService implements ProductServiceImpl {
 	}
 
 	@Override
-	public void delete(ProductDTO dto) {
+	public void delete(ItemDTO dto) {
 		//Check if product exists.
-		Product product = productRepository.findById(dto.getId()).orElseThrow(
+		Item item = itemRepository.findById(dto.getId()).orElseThrow(
 			() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Produto inválido.")
 		);
 
 		//Delete product.
-		productRepository.delete(product);
+		itemRepository.delete(item);
 	}
    
 }

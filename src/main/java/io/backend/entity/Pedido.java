@@ -15,9 +15,11 @@ public class Pedido {
     private UUID id;
 
     @ManyToMany
-    private List<Product> product;
+    private List<Item> item;
 
     private LocalDateTime createdOrder;
+
+    private Double total;
 
     @ManyToOne
     private User user;

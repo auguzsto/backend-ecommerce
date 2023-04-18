@@ -2,10 +2,10 @@ package io.backend.services;
 
 import io.backend.DTO.PedidoDTO;
 import io.backend.entity.Pedido;
-import io.backend.entity.Product;
+import io.backend.entity.Item;
 import io.backend.interfaces.PedidoServiceImpl;
 import io.backend.repository.PedidoRepository;
-import io.backend.repository.ProductRepository;
+import io.backend.repository.ItemRepository;
 import io.backend.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class PedidoService implements PedidoServiceImpl {
     private UserRepository userRepository;
 
     @Autowired
-    private ProductRepository productRepository;
+    private ItemRepository itemRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -49,15 +49,20 @@ public class PedidoService implements PedidoServiceImpl {
         userRepository.findById(dto.getIdUser()).map(
                 user -> {
                     //Creating order.
-                    List<UUID> idProduct = new ArrayList<UUID>();
-                    idProduct.addAll(dto.getIdProduct());
-                    List<Product> products = productRepository.findAllById(idProduct);
+                    List<UUID> idItem = new ArrayList<UUID>();
+                    idItem.addAll(dto.getIdItem());
+                    List<Item> items = itemRepository.findAllById(idItem);
                     Pedido pedido = new Pedido();
-                    pedido.setProduct(products);
+                    pedido.setItem(items);
                     pedido.setCreatedOrder(LocalDateTime.now());
+                    pedido.setTotal(
+                            items.stream().mapToDouble(
+                                    Item::getPrice
+                            ).sum()
+                    );
                     pedido.setUser(user);
                     pedidoRepository.save(pedido);
-                    idProduct.clear();
+                    idItem.clear();
                     return pedido;
                 }
                 )

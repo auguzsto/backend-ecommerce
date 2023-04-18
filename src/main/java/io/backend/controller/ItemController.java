@@ -10,34 +10,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.backend.DTO.ProductDTO;
-import io.backend.interfaces.ProductServiceImpl;
-import io.backend.services.ProductService;
+import io.backend.DTO.ItemDTO;
+import io.backend.interfaces.ItemServiceImpl;
+import io.backend.services.ItemService;
 import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/product")
-public class ProductController implements ProductServiceImpl {
+public class ItemController implements ItemServiceImpl {
 
     @Autowired
-    private ProductService productService;
+    private ItemService itemService;
 
 	@Override
     @GetMapping
-	public Set<ProductDTO> all() {
-		return productService.all();
+	public Set<ItemDTO> all() {
+		return itemService.all();
 	}
 
 	@Override
     @PostMapping
-	public void add(@RequestBody ProductDTO dto) {
-		productService.add(dto);
+	public void add(@RequestBody ItemDTO dto) {
+		itemService.add(dto);
 	}
 
 	@Override
     @DeleteMapping("/{id}")
-	public void delete(@PathParam("id") ProductDTO dto) {
-		productService.delete(dto);
+	public void delete(@PathParam("id") ItemDTO dto) {
+		itemService.delete(dto);
 	}
     
 }

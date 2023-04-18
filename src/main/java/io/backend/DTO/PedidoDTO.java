@@ -12,8 +12,9 @@ import java.util.UUID;
 public class PedidoDTO {
 
     private UUID id;
-    private List<ProductDTO> product;
-    private List<UUID> idProduct;
+    private List<ItemDTO> item;
+    private List<UUID> idItem;
     private LocalDateTime createdOrder;
+    private Double total;
     private UUID idUser;
 }
