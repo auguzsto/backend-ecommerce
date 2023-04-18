@@ -3,6 +3,7 @@ package io.backend.controller;
 import io.backend.DTO.PedidoDTO;
 import io.backend.interfaces.PedidoServiceImpl;
 import io.backend.services.PedidoService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,4 +27,13 @@ public class PedidoController implements PedidoServiceImpl {
     public void add(@RequestBody PedidoDTO dto) {
         pedidoService.add(dto);
     }
+
+    @Override
+    @GetMapping("/{id}")
+    public PedidoDTO findById(@PathParam("id") PedidoDTO dto) {
+        return pedidoService.findById(dto);
+    }
+
+
+
 }

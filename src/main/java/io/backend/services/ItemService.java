@@ -44,7 +44,7 @@ public class ItemService implements ItemServiceImpl {
 		userRepository.findById(dto.getIdUser()).map(
 				user -> {
 					if(user.getVendor() == 0) {
-						throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+						throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário não é vendedor");
 					}
 
 					Item item = new Item();

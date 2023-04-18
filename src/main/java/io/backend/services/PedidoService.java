@@ -71,4 +71,12 @@ public class PedidoService implements PedidoServiceImpl {
                         () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário inválido")
                 );
     }
+
+    @Override
+    public PedidoDTO findById(PedidoDTO dto) {
+        return pedidoRepository.findById(dto.getId()).map(
+                pedido -> modelMapper.map(pedido, PedidoDTO.class)
+        ).orElseThrow();
+    }
+
 }
