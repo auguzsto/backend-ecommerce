@@ -19,9 +19,10 @@ public class UserController  implements UserServiceImpl{
     @Autowired
     private UserService userService;
 
-    @GetMapping("/{id}")
-    public UserDTO findById(@PathParam("id") UserDTO dto) {
-        return userService.findById(dto);
+    @Override
+    @GetMapping
+    public List<UserDTO> all(UserDTO dto) {
+        return userService.all(dto);
     }
 
     @Override

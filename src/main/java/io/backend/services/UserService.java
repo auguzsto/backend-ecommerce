@@ -2,6 +2,8 @@ package io.backend.services;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,11 +32,15 @@ public class UserService implements UserServiceImpl{
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
-    public UserDTO findById(UserDTO dto) {
-        return userRepository.findById(dto.getId()).map(
-                user -> modelMapper.map(user, UserDTO.class)
-        ).orElseThrow();
+    @Override
+    public List<UserDTO> all(UserDTO dto) {
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreCase()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example<User> user = Example.of(modelMapper.map(dto, User.class), matcher);
+        return userRepository.findAll(user).stream().map(
+                u -> modelMapper.map(u, UserDTO.class)
+        ).collect(Collectors.toList());
     }
 
     @Override

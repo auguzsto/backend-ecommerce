@@ -18,8 +18,8 @@ public class PedidoController implements PedidoServiceImpl {
 
     @Override
     @GetMapping
-    public List<PedidoDTO> all() {
-        return pedidoService.all();
+    public List<PedidoDTO> all(PedidoDTO dto) {
+        return pedidoService.all(dto);
     }
 
     @Override
@@ -27,13 +27,6 @@ public class PedidoController implements PedidoServiceImpl {
     public void add(@RequestBody PedidoDTO dto) {
         pedidoService.add(dto);
     }
-
-    @Override
-    @GetMapping("/{id}")
-    public PedidoDTO findById(@PathParam("id") PedidoDTO dto) {
-        return pedidoService.findById(dto);
-    }
-
 
 
 }

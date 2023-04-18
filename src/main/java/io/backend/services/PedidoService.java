@@ -9,6 +9,8 @@ import io.backend.repository.ItemRepository;
 import io.backend.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,10 +38,14 @@ public class PedidoService implements PedidoServiceImpl {
     private ModelMapper modelMapper;
 
     @Override
-    public List<PedidoDTO> all() {
-        return pedidoRepository.findAll().stream().map(
-                pedido -> modelMapper.map(pedido, PedidoDTO.class))
-                .collect(Collectors.toList());
+    public List<PedidoDTO> all(PedidoDTO dto) {
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreCase()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example<Pedido> pedido = Example.of(modelMapper.map(dto, Pedido.class), matcher);
+        return pedidoRepository.findAll(pedido).stream().map(
+                p -> modelMapper.map(p, PedidoDTO.class)
+        ).collect(Collectors.toList());
     }
 
     @Override
@@ -70,13 +76,6 @@ public class PedidoService implements PedidoServiceImpl {
                 .orElseThrow(
                         () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário inválido")
                 );
-    }
-
-    @Override
-    public PedidoDTO findById(PedidoDTO dto) {
-        return pedidoRepository.findById(dto.getId()).map(
-                pedido -> modelMapper.map(pedido, PedidoDTO.class)
-        ).orElseThrow();
     }
 
 }

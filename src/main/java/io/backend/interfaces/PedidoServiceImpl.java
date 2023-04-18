@@ -8,10 +8,8 @@ import java.util.UUID;
 
 public interface PedidoServiceImpl {
 
-    public List<PedidoDTO> all();
+    public List<PedidoDTO> all(PedidoDTO dto);
 
     public void add(PedidoDTO dto);
-
-    public PedidoDTO findById(PedidoDTO dto);
 
 }
