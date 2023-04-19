@@ -1,11 +1,12 @@
 package io.backend.interfaces;
+import java.util.List;
 import java.util.Set;
 
 import io.backend.DTO.ItemDTO;
 
 public interface ItemServiceImpl {
     
-    Set<ItemDTO> all();
+    List<ItemDTO> all(ItemDTO dto);
 
     void add(ItemDTO dto);
 

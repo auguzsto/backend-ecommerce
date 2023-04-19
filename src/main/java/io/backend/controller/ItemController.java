@@ -1,6 +1,6 @@
 package io.backend.controller;
 
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +16,7 @@ import io.backend.services.ItemService;
 import jakarta.websocket.server.PathParam;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/item")
 public class ItemController implements ItemServiceImpl {
 
     @Autowired
@@ -24,8 +24,8 @@ public class ItemController implements ItemServiceImpl {
 
 	@Override
     @GetMapping
-	public Set<ItemDTO> all() {
-		return itemService.all();
+	public List<ItemDTO> all(ItemDTO dto) {
+		return itemService.all(dto);
 	}
 
 	@Override

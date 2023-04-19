@@ -1,10 +1,13 @@
 package io.backend.services;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,12 +32,15 @@ public class ItemService implements ItemServiceImpl {
     private ModelMapper modelMapper;
 
 	@Override
-	public Set<ItemDTO> all() {
+	public List<ItemDTO> all(ItemDTO dto) {
 		//Return list of the products
-        return itemRepository.findAll()
-        .stream().map(
-						item -> modelMapper.map(item, ItemDTO.class)
-            ).collect(Collectors.toSet());
+		ExampleMatcher matcher = ExampleMatcher.matching()
+				.withIgnoreCase()
+				.withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+		Example<Item> item = Example.of(modelMapper.map(dto, Item.class), matcher);
+		return itemRepository.findAll(item).stream().map(
+				i -> modelMapper.map(i, ItemDTO.class)
+		).collect(Collectors.toList());
 	}
 
 	@Override
