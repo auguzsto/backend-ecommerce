@@ -18,12 +18,14 @@ public class PedidoController implements PedidoServiceImpl {
 
     @Override
     @GetMapping
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<PedidoDTO> all(PedidoDTO dto) {
         return pedidoService.all(dto);
     }
 
     @Override
     @PostMapping
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public void add(@RequestBody PedidoDTO dto) {
         pedidoService.add(dto);
     }

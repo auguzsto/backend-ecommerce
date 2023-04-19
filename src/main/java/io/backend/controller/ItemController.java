@@ -3,12 +3,7 @@ package io.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.backend.DTO.ItemDTO;
 import io.backend.interfaces.ItemServiceImpl;
@@ -24,18 +19,21 @@ public class ItemController implements ItemServiceImpl {
 
 	@Override
     @GetMapping
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	public List<ItemDTO> all(ItemDTO dto) {
 		return itemService.all(dto);
 	}
 
 	@Override
     @PostMapping
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	public void add(@RequestBody ItemDTO dto) {
 		itemService.add(dto);
 	}
 
 	@Override
     @DeleteMapping("/{id}")
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	public void delete(@PathParam("id") ItemDTO dto) {
 		itemService.delete(dto);
 	}
