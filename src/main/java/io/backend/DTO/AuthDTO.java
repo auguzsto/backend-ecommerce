@@ -11,4 +11,5 @@ public class AuthDTO {
     private UUID id;
     private String username;
     private Integer vendor;
+    private String basicToken;
 }

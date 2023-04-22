@@ -41,6 +41,7 @@ public class AuthService implements AuthServiceImpl {
                     auth.setId(user.getId());
                     auth.setUsername(user.getUsername());
                     auth.setVendor(user.getVendor());
+                    auth.setBasicToken(user.getBasicToken());
                     return auth;
                 }
         ).orElseThrow(
