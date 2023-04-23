@@ -25,15 +25,22 @@ public class ItemController implements ItemServiceImpl {
 	}
 
 	@Override
-    @PostMapping
+	@GetMapping("/offers")
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	public List<ItemDTO> allOffer(ItemDTO dto) {
+		return itemService.allOffer(dto);
+	}
+
+	@Override
+    @PostMapping
+	@CrossOrigin
 	public void add(@RequestBody ItemDTO dto) {
 		itemService.add(dto);
 	}
 
 	@Override
     @DeleteMapping("/{id}")
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@CrossOrigin
 	public void delete(@PathParam("id") ItemDTO dto) {
 		itemService.delete(dto);
 	}

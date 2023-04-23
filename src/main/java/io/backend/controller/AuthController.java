@@ -7,10 +7,7 @@ import io.backend.interfaces.AuthServiceImpl;
 import io.backend.services.AuthService;
 import jakarta.servlet.ServletException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -22,11 +19,13 @@ public class AuthController implements AuthServiceImpl {
 
     @Override
     @PostMapping
+    @CrossOrigin
     public AuthDTO login(@RequestBody UserDTO dto) {
         return authService.login(dto);
     }
 
     @PostMapping("/logout")
+    @CrossOrigin
     public void logout() throws ServletException {
         authService.logout();
     }

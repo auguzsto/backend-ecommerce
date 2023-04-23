@@ -25,7 +25,7 @@ public class PedidoController implements PedidoServiceImpl {
 
     @Override
     @PostMapping
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @CrossOrigin
     public void add(@RequestBody PedidoDTO dto) {
         pedidoService.add(dto);
     }

@@ -21,21 +21,21 @@ public class UserController  implements UserServiceImpl{
 
     @Override
     @GetMapping
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @CrossOrigin
     public List<UserDTO> all(UserDTO dto) {
         return userService.all(dto);
     }
 
     @Override
     @PostMapping
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @CrossOrigin
     public UserDTO add(@RequestBody UserDTO dto) {
         return userService.add(dto);
     }
 
     @Override
     @DeleteMapping("/{id}")
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @CrossOrigin
     public void delete(@PathParam("id") UserDTO dto) {
         userService.delete(dto);
     }

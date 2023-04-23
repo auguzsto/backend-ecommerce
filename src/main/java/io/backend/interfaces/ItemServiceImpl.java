@@ -8,6 +8,8 @@ public interface ItemServiceImpl {
     
     List<ItemDTO> all(ItemDTO dto);
 
+    List<ItemDTO> allOffer(ItemDTO dto);
+
     void add(ItemDTO dto);
 
     void delete(ItemDTO dto);
