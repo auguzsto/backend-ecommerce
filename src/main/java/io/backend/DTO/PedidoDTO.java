@@ -14,7 +14,7 @@ public class PedidoDTO {
     private UUID id;
     private List<ItemDTO> item;
     private List<UUID> idItem;
-    private LocalDateTime createdOrder;
+    private String createdOrder;
     private Double total;
     private UUID idUser;
 }

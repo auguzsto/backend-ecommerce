@@ -9,7 +9,9 @@ import java.util.UUID;
 @Setter
 public class AuthDTO {
     private UUID id;
-    private String username;
+    private String email;
+    private String address;
+    private String numberPhone;
     private Integer vendor;
     private String basicToken;
 }

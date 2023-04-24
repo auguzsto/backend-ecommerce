@@ -32,14 +32,16 @@ public class AuthService implements AuthServiceImpl {
 
     @Override
     public AuthDTO login(UserDTO dto) {
-        String generatorToken = HttpHeaders.encodeBasicAuth(dto.getUsername(),
+        String generatorToken = HttpHeaders.encodeBasicAuth(dto.getEmail(),
                 dto.getPassword(),
                 StandardCharsets.ISO_8859_1);
         return userRepository.findByBasicToken(generatorToken).map(
                 user -> {
                     AuthDTO auth = new AuthDTO();
                     auth.setId(user.getId());
-                    auth.setUsername(user.getUsername());
+                    auth.setEmail(user.getEmail());
+                    auth.setAddress(user.getAddress());
+                    auth.setNumberPhone(user.getNumberPhone());
                     auth.setVendor(user.getVendor());
                     auth.setBasicToken(user.getBasicToken());
                     return auth;

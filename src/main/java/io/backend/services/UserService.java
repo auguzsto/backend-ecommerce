@@ -46,7 +46,7 @@ public class UserService implements UserServiceImpl{
     @Override
     public UserDTO add(UserDTO dto) {
         //Check if username already exists.
-        userRepository.findByUsername(dto.getUsername()).map(
+        userRepository.findByEmail(dto.getEmail()).map(
             user -> {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário já cadastrado");
             }
@@ -54,10 +54,12 @@ public class UserService implements UserServiceImpl{
         
         //Create new user.
         User user = new User();
-        user.setUsername(dto.getUsername());
+        user.setEmail(dto.getEmail());
         user.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
-        user.setVendor(0);
-        user.setBasicToken(HttpHeaders.encodeBasicAuth(dto.getUsername(), dto.getPassword(), StandardCharsets.ISO_8859_1));
+        user.setNumberPhone(dto.getNumberPhone());
+        user.setAddress(dto.getAddress());
+        user.setVendor(dto.getVendor());
+        user.setBasicToken(HttpHeaders.encodeBasicAuth(dto.getEmail(), dto.getPassword(), StandardCharsets.ISO_8859_1));
         userRepository.save(user);
         return modelMapper.map(user, UserDTO.class);
  
