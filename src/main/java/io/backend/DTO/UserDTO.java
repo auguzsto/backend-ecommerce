@@ -15,6 +15,8 @@ public class UserDTO {
     private String address;
     private String numberPhone;
     private Integer vendor;
+    private String created_at;
+    private String updated_at;
 
     
 }

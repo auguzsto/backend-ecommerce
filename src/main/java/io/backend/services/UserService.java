@@ -16,6 +16,7 @@ import io.backend.interfaces.UserServiceImpl;
 import io.backend.repository.UserRepository;
 
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -45,7 +46,7 @@ public class UserService implements UserServiceImpl{
 
     @Override
     public UserDTO add(UserDTO dto) {
-        //Check if username already exists.
+        //Check if e-mail already exists.
         userRepository.findByEmail(dto.getEmail()).map(
             user -> {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário já cadastrado");
@@ -60,6 +61,7 @@ public class UserService implements UserServiceImpl{
         user.setAddress(dto.getAddress());
         user.setVendor(dto.getVendor());
         user.setBasicToken(HttpHeaders.encodeBasicAuth(dto.getEmail(), dto.getPassword(), StandardCharsets.ISO_8859_1));
+        user.setCreated_at(LocalDateTime.now());
         userRepository.save(user);
         return modelMapper.map(user, UserDTO.class);
  

@@ -1,5 +1,6 @@
 package io.backend.entity;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.persistence.*;
@@ -30,5 +31,10 @@ public class User {
 
     @NotNull @Column(unique = true)
     private String basicToken;
+
+    @NotNull
+    private LocalDateTime created_at;
+
+    private LocalDateTime update_at;
     
 }
