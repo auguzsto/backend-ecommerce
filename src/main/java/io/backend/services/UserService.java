@@ -64,9 +64,7 @@ public class UserService implements UserServiceImpl{
         user.setCreated_at(LocalDateTime.now());
         userRepository.save(user);
         return modelMapper.map(user, UserDTO.class);
- 
 
-        
     }
 
     @Override
