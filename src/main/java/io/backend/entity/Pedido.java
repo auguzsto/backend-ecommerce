@@ -19,6 +19,8 @@ public class Pedido {
 
     private LocalDateTime createdOrder;
 
+    private LocalDateTime updated_at;
+
     private Double total;
 
     @ManyToOne

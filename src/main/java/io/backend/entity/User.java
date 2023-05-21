@@ -35,6 +35,8 @@ public class User {
     @NotNull
     private LocalDateTime created_at;
 
-    private LocalDateTime update_at;
+    private LocalDateTime updated_at;
+
+    private LocalDateTime last_login;
     
 }

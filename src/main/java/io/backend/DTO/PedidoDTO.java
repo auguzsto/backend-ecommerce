@@ -15,6 +15,7 @@ public class PedidoDTO {
     private List<ItemDTO> item;
     private List<UUID> idItem;
     private String createdOrder;
+    private String updated_at;
     private Double total;
     private UUID idUser;
 }

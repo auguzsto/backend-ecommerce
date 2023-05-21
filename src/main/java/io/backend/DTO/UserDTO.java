@@ -17,6 +17,7 @@ public class UserDTO {
     private Integer vendor;
     private String created_at;
     private String updated_at;
+    private String last_login;
 
     
 }

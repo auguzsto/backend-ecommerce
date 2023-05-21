@@ -14,6 +14,8 @@ public class ItemDTO {
     private String description;
     private Double price;
     private Double priceOffer;
+    private String created_at;
+    private String updated_at;
     private UUID idUser;
     
 }

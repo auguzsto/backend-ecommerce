@@ -1,5 +1,6 @@
 package io.backend.entity;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.persistence.*;
@@ -22,6 +23,10 @@ public class Item {
     private Double price;
 
     private Double priceOffer;
+
+    private LocalDateTime created_at;
+
+    private LocalDateTime updated_at;
     
     @ManyToOne
     private User user;
